@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-edit-contact',
+  selector: 'editContact',
   standalone: true,
   imports: [],
   templateUrl: './edit-contact.component.html',
