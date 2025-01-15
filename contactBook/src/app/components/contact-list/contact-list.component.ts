@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from 'express';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ServicesConctatBookService } from '../../services/services-conctat-book.service';
 import { Contact } from '../../models/contacts';
 
+
 @Component({
   selector: 'contactList',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.css'
 })
@@ -15,7 +16,7 @@ export class ContactListComponent implements OnInit {
   
   contacts: Contact[] = [];
 
-  constructor(private contactServices: ServicesConctatBookService, private router: Router ) {
+  constructor(private contactServices: ServicesConctatBookService, private router: Router) {
     
   }
   ngOnInit(): void {

@@ -6,6 +6,16 @@ import { Contact } from '../models/contacts';
   providedIn: 'root'
 })
 export class ServicesConctatBookService {
+
+
+  updateContact(contactId: number, updatedContact: Contact): void {
+    const index = this.contactData.findIndex(c => c.id === contactId);
+    if (index !== -1) {
+      this.contactData[index] = updatedContact;
+    } else {
+      console.warn(`Contacto con ID ${contactId} no encontrado para actualizar.`);
+    }
+  }
   private contactData: Contact[] = contactData;
 
   constructor() { }
