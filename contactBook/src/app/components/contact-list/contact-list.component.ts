@@ -15,15 +15,23 @@ export class ContactListComponent implements OnInit {
   
   contacts: Contact[] = [];
 
-  constructor(private contactServices: ServicesConctatBookService ) {
+  constructor(private contactServices: ServicesConctatBookService, private router: Router ) {
     
   }
   ngOnInit(): void {
-    this.cargarGasto();
+    this.cargarContactos();
   }
   
 
-  cargarGasto(): void {
+  cargarContactos(): void {
     this.contacts = this.contactServices.getContacts();
   }
+
+  deleteContact(id: number): void {
+    if (confirm('Estas seguro que desea eliminar este contacto?')){
+      this.contactServices.deleteContact(id);
+      //Actualizar vista
+      this.cargarContactos();
+    }
+    }
 }

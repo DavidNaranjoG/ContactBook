@@ -16,5 +16,15 @@ export class ServicesConctatBookService {
     return this.contactData
   }
 
+  //metodo para eliminar un contacto
+  deleteContact(id: number): Contact []{
+    if (!this.contactData.some(contact => contact.id === id)) {
+      console.warn(`Contacto con id ${id} no encontrado.`);
+    }
+    this.contactData  = this.contactData.filter(contact => contact.id != id);
+    console.log("esta es la lista nueva: ", contactData)
+    return this.contactData;
+  }
+
   
 }
