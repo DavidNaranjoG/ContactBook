@@ -6,7 +6,9 @@ import { Contact } from '../models/contacts';
   providedIn: 'root'
 })
 export class ServicesConctatBookService {
-
+  constructor() {
+    console.log("este es el contacto actualizado", this.updateContact)
+   }
 
   updateContact(contactId: number, updatedContact: Contact): void {
     const index = this.contactData.findIndex(c => c.id === contactId);
@@ -18,7 +20,7 @@ export class ServicesConctatBookService {
   }
   private contactData: Contact[] = contactData;
 
-  constructor() { }
+ 
 
 
   getContacts(): Contact[] {    

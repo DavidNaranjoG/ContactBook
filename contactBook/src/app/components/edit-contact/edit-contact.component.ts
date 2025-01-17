@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Contact } from '../../models/contacts';
 import { ServicesConctatBookService } from '../../services/services-conctat-book.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'editContact',
   standalone: true,
-  imports: [],
+  imports: [RouterModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './edit-contact.component.html',
   styleUrl: './edit-contact.component.css'
 })
@@ -33,6 +35,12 @@ export class EditContactComponent implements OnInit {
     //Cargar el contacto original
 
     this.originalContact = this.servicesContactBook.getContacts().find(c => c.id === this.contactId)!;
+
+    if (!this.originalContact) {
+      console.error(`No se encontró el contacto con ID ${this.contactId}.`);
+      this.router.navigate(['']); // Redirige si el contacto no existe
+      return;
+    }
  
     // Inicializar el formulario con los datos del gasto
     this.contactForm =this.fb.group({
@@ -45,7 +53,7 @@ export class EditContactComponent implements OnInit {
 
   }
 
-  saveUpdatedContact(){
+  saveUpdatedContact(): void {
     if(this.contactForm.valid){
       const updatedContact: Contact = {
         ...this.originalContact,
@@ -61,7 +69,7 @@ export class EditContactComponent implements OnInit {
 
       //Redirigir a la pagina de contactos
       this.router.navigate([''])
-    }
+    } 
     
   }
   cancelar(): void {
